@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Playbook operacional do funil de marketing da Amor de Patas.">
+  <title>Amor de Patas | Receita do Funil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top app-nav">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#top"><span class="brand-mark">🐾</span><span>Amor de Patas <small>playbook</small></span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Abrir menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#visao-geral">Visão geral</a></li>
+          <li class="nav-item"><a class="nav-link" href="#campanhas">Campanhas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#calendario">12 semanas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#operacao">Operação</a></li>
+          <li class="nav-item ms-lg-2"><button id="printBtn" class="btn btn-sm btn-outline-light">Imprimir / PDF</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero-section">
+      <div class="container-fluid px-lg-5">
+        <div class="row align-items-end g-4">
+          <div class="col-xl-8">
+            <p class="eyebrow">RECEITA OPERACIONAL · 90 DIAS</p>
+            <h1>Do primeiro olhar à próxima compra.</h1>
+            <p class="hero-lead">Um playbook acionável para transformar as ideias da planilha em campanhas publicáveis, mensuráveis e conectadas pela carteirinha de vacinação.</p>
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <a class="btn btn-brand" href="#campanhas">Explorar as 40 campanhas <span>→</span></a>
+              <a class="btn btn-soft" href="#calendario">Ver sprint de 12 semanas</a>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="hero-note">
+              <span class="note-icon">✦</span>
+              <div><strong>Como ler este playbook</strong><p>Dados, nomes, públicos, canais, orçamentos e metas vêm da planilha. Os passos, mensagens, testes e controles são a operacionalização recomendada.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="visao-geral" class="section-block">
+      <div class="container-fluid px-lg-5">
+        <div class="section-heading"><div><p class="eyebrow">01 · DIREÇÃO</p><h2>O norte dos próximos 90 dias</h2></div><span class="source-chip">Fonte: Dashboard Funil + Campanhas e Orçamento</span></div>
+        <div id="kpiGrid" class="row g-3 mb-4"></div>
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-8"><div class="panel h-100"><div class="panel-heading"><div><span class="eyebrow">JORNADA</span><h3>Uma passagem contínua pelo funil</h3></div><span class="mini-caption">baseline → meta</span></div><div id="funnelRoadmap" class="funnel-roadmap"></div></div></div>
+          <div class="col-lg-4"><div class="panel h-100 budget-panel"><div class="panel-heading"><div><span class="eyebrow">ORÇAMENTO</span><h3>Alocação da verba</h3></div><select id="budgetScenario" class="form-select form-select-sm w-auto"><option value="enxuto">Enxuto / mês</option><option value="escala">Escala / 90 dias</option></select></div><div id="budgetSummary"></div><div class="budget-total"><span>Total selecionado</span><strong id="budgetTotal">—</strong></div></div></div>
+        </div>
+        <div class="insight-strip mt-4"><span>◎</span><div><strong>Insight de gestão</strong><p class="mb-0">O funil não termina na venda: a base mostra 24% de recompra real. A carteirinha reaproveita a foto do pet e cria um motivo legítimo para voltar a conversar.</p></div></div>
+      </div>
+    </section>
+
+    <section id="campanhas" class="section-block section-tint">
+      <div class="container-fluid px-lg-5">
+        <div class="section-heading align-items-end"><div><p class="eyebrow">02 · EXECUÇÃO</p><h2>As 40 campanhas, prontas para sair do papel</h2><p class="section-intro">Clique em qualquer cartão para abrir a receita completa: preparação, ativação, atendimento, medição e otimização.</p></div><div class="campaign-count" id="campaignCount">40 campanhas</div></div>
+        <div class="toolbar panel mb-4"><div class="search-wrap"><span>⌕</span><input id="campaignSearch" type="search" placeholder="Buscar campanha, canal ou público..." aria-label="Buscar campanha"></div><div id="stageFilters" class="filter-group" role="group" aria-label="Filtrar campanhas"></div><label class="form-check form-switch mb-0 ms-lg-auto"><input id="cardFilter" class="form-check-input" type="checkbox"><span class="form-check-label">Só com carteirinha</span></label></div>
+        <div id="campaignGrid" class="row g-3"></div>
+        <div id="emptyState" class="empty-state d-none"><div>🐾</div><h3>Nenhuma campanha encontrada</h3><p>Ajuste a busca ou remova o filtro para ver o plano completo.</p></div>
+      </div>
+    </section>
+
+    <section id="calendario" class="section-block">
+      <div class="container-fluid px-lg-5">
+        <div class="section-heading"><div><p class="eyebrow">03 · RITMO</p><h2>Sprint de implantação em 12 semanas</h2><p class="section-intro">A ordem é intencional: primeiro instrumentar e gerar demanda; depois nutrir, converter e criar recorrência.</p></div><button id="copyCalendarBtn" class="btn btn-outline-brand btn-sm">Copiar resumo</button></div>
+        <div class="calendar-shell panel"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Semana</th><th>Etapa</th><th>Campanha / marco</th><th>Responsável</th><th>Status local</th></tr></thead><tbody id="calendarBody"></tbody></table></div></div>
+        <div class="row g-3 mt-3"><div class="col-md-4"><div class="phase-callout"><span>1–3</span><div><strong>Fundação e aquisição</strong><small>Instrumentar, publicar criativos e abrir as primeiras capturas.</small></div></div></div><div class="col-md-4"><div class="phase-callout"><span>4–8</span><div><strong>Qualificação e relacionamento</strong><small>Segmentar, nutrir, reativar e construir confiança.</small></div></div></div><div class="col-md-4"><div class="phase-callout"><span>9–12</span><div><strong>Venda e recorrência</strong><small>Ativar ofertas, recuperar carrinhos e fechar o ciclo.</small></div></div></div></div>
+      </div>
+    </section>
+
+    <section id="operacao" class="section-block section-tint">
+      <div class="container-fluid px-lg-5">
+        <div class="section-heading"><div><p class="eyebrow">04 · SISTEMA</p><h2>O que precisa estar funcionando antes da mídia</h2></div></div>
+        <ul class="nav nav-pills ops-tabs mb-4" id="opsTabs" role="tablist"><li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-leads">Leads & CRM</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-card">Carteirinha</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-stock">Estoque & oferta</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-metrics">Medição</button></li></ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="tab-leads"><div class="row g-4"><div class="col-lg-7"><div class="panel h-100"><h3>Roteamento em até 15 minutos</h3><p class="muted">A amostra tem 300 leads, 214 tutores de cães, 81 de gatos, 172 MQLs e 58 pessoas interessadas em carteirinha. Use esses campos para priorizar a próxima ação.</p><div class="lead-flow"><div><b>1</b><strong>Capturar</strong><small>nome, WhatsApp, pet, espécie, origem, consentimento</small></div><i>→</i><div><b>2</b><strong>Classificar</strong><small>Lead / MQL / SQL + interesse + Curva ABC</small></div><i>→</i><div><b>3</b><strong>Acionar</strong><small>automação certa e dono definido no SuiteCRM</small></div></div></div></div><div class="col-lg-5"><div class="panel h-100"><h3>Cadência mínima recomendada</h3><ul class="clean-list"><li><span>D0</span>entrega do benefício e confirmação do cadastro</li><li><span>D1</span>prova social + produto recomendado</li><li><span>D3</span>conteúdo útil conforme espécie/interesse</li><li><span>D7</span>oferta com prazo ou atendimento humano</li><li><span>D30</span>reativação de MQL sem interação</li></ul><div class="small-callout">Só contatar quem aceitou novidades; registrar origem e opt-out.</div></div></div></div></div>
+          <div class="tab-pane fade" id="tab-card"><div class="row g-4"><div class="col-lg-8"><div class="panel"><h3>A carteirinha como produto de relacionamento</h3><p class="muted">Fluxo recomendado: captar a foto já solicitada na personalização → emitir versão digital → oferecer versão física → registrar datas de vacina e aniversário → enviar lembretes → atribuir recompra.</p><div class="card-metrics"><div><strong>173</strong><small>fotos recebidas</small></div><div><strong>150</strong><small>digitais emitidas</small></div><div><strong>67</strong><small>físicas emitidas</small></div><div><strong>20</strong><small>recompras em 90 dias</small></div></div></div></div><div class="col-lg-4"><div class="panel"><h3>Régua do lembrete</h3><ol class="clean-list numbered"><li>7 dias antes: aviso + utilidade</li><li>no dia: CTA para atualizar / comprar</li><li>2 dias depois: prova social ou ajuda</li><li>atribuir receita pelo cupom/UTM</li></ol></div></div></div></div>
+          <div class="tab-pane fade" id="tab-stock"><div class="panel"><h3>Curva ABC orientando a comunicação</h3><div class="table-responsive"><table class="table compact-table"><thead><tr><th>Produto</th><th>Prioridade</th><th>Estoque</th><th>Decisão operacional</th></tr></thead><tbody><tr><td>Moletom</td><td><span class="priority a">A</span></td><td>12 · risco M/G</td><td>Repor antes de escalar mídia; anunciar somente tamanhos disponíveis.</td></tr><tr><td>Camiseta</td><td><span class="priority a">A</span></td><td>80 · disponível</td><td>Produto-herói: manter destaque e usar como entrada.</td></tr><tr><td>Vestido</td><td><span class="priority b">B</span></td><td>74 · excesso</td><td>Liquidar com contagem regressiva e controle de margem.</td></tr><tr><td>Bandana</td><td><span class="priority b">B</span></td><td>50 · disponível</td><td>Cross-sell com camiseta/moletom; testar kit de 3.</td></tr><tr><td>Boné</td><td><span class="priority c">C</span></td><td>10 · reposição</td><td>Não comprar mídia dedicada; vender por demanda.</td></tr></tbody></table></div></div></div>
+          <div class="tab-pane fade" id="tab-metrics"><div class="row g-4"><div class="col-lg-7"><div class="panel"><h3>Painel semanal de decisão</h3><div class="metric-grid"><div><b>Aquisição</b><small>visitas, CTR, CPC, CPM, alcance</small></div><div><b>Captura</b><small>taxa visitante → lead, CPL, opt-in</small></div><div><b>Qualificação</b><small>MQL, SQL, tempo de resposta</small></div><div><b>Receita</b><small>pedidos, ticket, CAC, ROAS, recompra</small></div></div></div></div><div class="col-lg-5"><div class="panel"><h3>Ritual de otimização</h3><ol class="clean-list numbered"><li>segunda: conferir tracking e estoque</li><li>quarta: revisar criativos e conversão</li><li>sexta: realocar verba por custo/resultado</li><li>fim do mês: registrar aprendizados e decisão</li></ol></div></div></div></div>
+        </div>
+        <div class="panel checklist-panel mt-4"><div><p class="eyebrow">CHECKLIST DE LANÇAMENTO</p><h3>Pronto para apertar “publicar”?</h3><p class="muted mb-0">Marque os itens concluídos. O progresso fica salvo neste navegador.</p></div><div id="launchChecklist" class="checklist-grid"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer"><div class="container-fluid px-lg-5 d-flex flex-wrap justify-content-between gap-3"><span>🐾 Amor de Patas · receita completa do funil</span><span>Documento operacional · revisão semanal</span></div></footer>
+
+  <div class="modal fade" id="campaignModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><div><p id="modalEyebrow" class="eyebrow mb-1"></p><h2 id="modalTitle" class="modal-title"></h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><div id="modalMeta" class="modal-meta mb-4"></div><div class="row g-4"><div class="col-lg-8"><div class="recipe-label">RECEITA DE EXECUÇÃO</div><div id="modalSteps" class="recipe-steps"></div></div><div class="col-lg-4"><div id="modalSidebar"></div></div></div></div></div></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
