@@ -71,6 +71,78 @@ function renderCampaigns(){
   document.querySelector('#campaignGrid').innerHTML=filtered.map(c=>`<div class="col-md-6 col-xl-4"><article class="campaign-card"><div class="campaign-top"><span class="stage-tag ${stageClass(c.s)}">${c.s}</span><span class="card-number">#${String(c.i+1).padStart(2,'0')}</span></div><h3>${esc(c.n)}</h3><p>${esc(c.p)}</p><div class="card-meta"><span class="meta-pill">◉ ${esc(c.c)}</span>${c.v==='Sim'?'<span class="meta-pill cardinal">✦ Carteirinha</span>':''}</div><div class="card-footer-line"><small>${money(c.b)}/mês · meta ${esc(c.r)}</small><a href="#" class="open-recipe" data-index="${c.i}">Abrir receita →</a></div></article></div>`).join('');
   document.querySelector('#campaignCount').textContent=`${filtered.length} de ${campaigns.length} campanhas`; document.querySelector('#emptyState').classList.toggle('d-none',filtered.length>0); document.querySelectorAll('.open-recipe').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openRecipe(Number(a.dataset.index))}));
 }
+const practicalCopy = [
+  'Reels com 3 looks, enquete de espécie e CTA para conhecer a coleção.',
+  'Anúncio de busca: “Presente personalizado para pet” + artigo/landing de apoio.',
+  'Vídeo de 15 segundos com transição do pet para o look e hashtag do desafio.',
+  'Anúncio de retorno com prova social para quem visitou e não concluiu o cadastro.',
+  'Card compartilhável com código individual e benefício para tutor e amigo.',
+  'Landing de utilidade: cadastro do pet → emissão da carteirinha digital.',
+  'Cartaz de clínica com QR code individual e instrução de uma frase.',
+  'Post participativo com pergunta emocional, prazo e autorização de repost.',
+  'Landing de captura com cupom PATAS10 entregue na tela e no WhatsApp.',
+  'Formulário curto para emitir carteirinha e confirmar dados do pet.',
+  'Quiz de 4 perguntas com recomendação de produto ao final.',
+  'Fluxo de chatbot: espécie → interesse → consentimento → atendimento humano.',
+  'Pop-up de saída com benefício útil e frequência limitada por sessão.',
+  'Duas versões de landing: uma para cães e outra para gatos.',
+  'Checkout com campos progressivos, autosave e retomada da personalização.',
+  'Anúncio de alta intenção com extensão de sitelinks e conversão de formulário.',
+  'Régua de 5 contatos com conteúdo, prova social, score e tarefa de vendas.',
+  'WhatsApp: aviso de vacina, CTA de atualização e tag de recompra.',
+  'Carrossel sazonal com problema, dica prática, produto e CTA rastreado.',
+  'Convite para comunidade com regras, benefício real e calendário de conteúdo.',
+  'Sequência de reativação com pergunta de preferência e regra de supressão.',
+  'Página de inscrição para live com lembretes D-1 e H-1 e CTA final.',
+  'E-mail de entrega da carteirinha com tutorial e próximo passo de ativação.',
+  'Barra de progresso no WhatsApp mostrando pontos e próximo nível.',
+  'Landing de liquidação com estoque por tamanho, prazo real e contagem regressiva.',
+  'Bloco de kit no checkout com benefício, margem e confirmação de dados.',
+  'Recomendação automática de bandana relacionada ao item no carrinho.',
+  'Tela pós-compra com botão de compartilhamento e código rastreável.',
+  'Sequência de carrinho: lembrete, ajuda/prova e incentivo final limitado.',
+  'Barra de progresso do carrinho até 3 bandanas para liberar frete.',
+  'Checkout com selo da causa, regra de doação e link para prestação de contas.',
+  'Live com demonstração, código exclusivo, perguntas e link fixado.',
+  'E-mail de convite ao clube com saldo inicial e benefícios sustentáveis.',
+  'WhatsApp acionado por data de vacina com recomendação contextual.',
+  'Card de indicação dupla com código do cliente e validação do amigo.',
+  'Pesquisa NPS pós-entrega com roteamento por nota e pedido de depoimento.',
+  'Mensagem de aniversário com cupom individual e catálogo elegível.',
+  'Régua de retorno baseada na última categoria comprada e margem.',
+  'Conteúdo fechado com bastidores, votação de estampas e acesso antecipado.',
+  'Selo digital personalizado, instrução de compartilhamento e hashtag.'
+];
+function mockupKind(c){
+  const n=c.n.toLowerCase();
+  if(n.includes('live')||n.includes('webinar')) return 'event';
+  if(n.includes('quiz')) return 'quiz';
+  if(n.includes('landing')||n.includes('cadastre')||n.includes('pop-up')||n.includes('formulário')) return 'landing';
+  if(n.includes('google')||n.includes('seo')) return 'search';
+  if(n.includes('checkout')||n.includes('carrinho')||n.includes('cross-sell')||n.includes('frete')||n.includes('kit')||n.includes('compre e doe')) return 'checkout';
+  if(n.includes('e-mail')||n.includes('régua')||n.includes('onboarding')||n.includes('nps')) return 'email';
+  if(n.includes('whatsapp')||n.includes('carteirinha como')||n.includes('aniversário')||n.includes('reativação')) return 'whatsapp';
+  if(n.includes('indicação')) return 'referral';
+  if(n.includes('clube')||n.includes('nível')) return 'loyalty';
+  return 'social';
+}
+function renderMockup(c,index){
+  const kind=mockupKind(c), copy=practicalCopy[index], image=kind==='social'?'assets/hero-pet-studio-v2.png':kind==='event'?'assets/content-production-v2.png':'assets/product-flatlay-v2.png';
+  const head=`<div class="applied-mockup-head"><span>MOCKUP ${String(index+1).padStart(2,'0')} · ${kind.toUpperCase()}</span><small>Exemplo de aplicação</small></div>`;
+  const foot=`<div class="mockup-proof"><span>✓ Peça adaptável</span><span>◉ CTA: ${esc(c.r)}</span><span>↗ Canal: ${esc(c.c)}</span></div>`;
+  let body='';
+  if(kind==='social') body=`<div class="social-mock"><div class="social-top"><b>amordepatas.oficial</b><small>Patrocinado · ${esc(c.s)}</small></div><div class="social-art"><img src="${image}" alt="Visual aplicado da campanha ${esc(c.n)}"><div class="social-overlay"><span>${esc(c.s.toUpperCase())}</span><strong>${esc(c.n.replace(/\s*\([^)]*\)/,'').slice(0,50))}</strong><em>Seu pet, seu estilo, seu momento.</em></div></div><div class="social-caption"><b>amordepatas.oficial</b> ${esc(copy)} <strong>Saiba mais →</strong></div></div>`;
+  if(kind==='search') body=`<div class="search-mock"><div class="search-line"><span>⌕</span><span>presente personalizado pet</span><b>×</b></div><small class="search-result-label">Anúncio · busca paga</small><div class="search-result"><div><span class="ad-tag">Patrocinado</span> <b>amordepatas.com.br</b></div><h4>Presente personalizado para pet | Amor de Patas</h4><p>Crie uma peça única com o nome e a foto do seu companheiro. Veja modelos e personalize online.</p><a>Conhecer coleção ›</a></div><div class="search-note">Hipótese: intenção de busca alta → landing específica → captura qualificada.</div></div>`;
+  if(kind==='landing') body=`<div class="landing-wire"><div class="wire-hero"><div><span class="mock-label">AMOR DE PATAS · ${esc(c.s.toUpperCase())}</span><h4>${esc(c.n.replace(/\s*\([^)]*\)/,'').slice(0,52))}</h4><p>${esc(copy)}</p><button class="wire-btn">Começar agora →</button></div><img src="${image}" alt="Produto da campanha ${esc(c.n)}"></div><div class="wire-form"><strong>Próximo passo do visitante</strong><div class="wire-fields"><span>Nome do tutor</span><span>WhatsApp</span><span>Espécie ▾</span></div><button class="wire-btn secondary">Continuar cadastro</button></div></div>`;
+  if(kind==='quiz') body=`<div class="quiz-mock"><div class="quiz-progress"><span style="width:60%"></span></div><small>PERGUNTA 3 DE 4</small><h4>Qual é o estilo que mais combina com ${esc(c.s==='Atrair'?'seu pet':'a sua família')}?</h4><div class="quiz-options"><button>Clássico e confortável</button><button>Divertido e colorido</button><button>Minimalista e elegante</button></div><p>Ao final: recomendação + captura de WhatsApp + CTA de produto.</p></div>`;
+  if(kind==='whatsapp') body=`<div class="chat-mock"><div class="chat-head"><span>AP</span><div><b>Amor de Patas</b><small>online agora</small></div></div><div class="chat-body"><div class="chat-date">HOJE</div><div class="bubble received">Oi, ${esc(c.s==='Fidelizar'?'família Amor de Patas':'tutor')}! 🐾 ${esc(copy)}</div><div class="bubble sent">Quero saber mais. Como faço?</div><div class="bubble received">Perfeito. Posso te enviar o próximo passo e registrar a preferência do seu pet?</div><div class="chat-cta">[ CTA rastreado ] ${esc(c.r)}</div></div></div>`;
+  if(kind==='email') body=`<div class="email-mock"><div class="email-bar"><span>De: relacionamento@amordepatas.com.br</span><span>Assunto: ${esc(c.n.replace(/\s*\([^)]*\)/,'').slice(0,58))}</span></div><div class="email-letter"><span class="mock-label">AMOR DE PATAS</span><h4>${esc(copy)}</h4><p>Olá, família! Preparamos este próximo passo para manter o cuidado com seu pet presente na rotina.</p><button class="wire-btn">Acessar benefício →</button><small>Preferências e descadastro no rodapé.</small></div></div>`;
+  if(kind==='checkout') body=`<div class="checkout-mock"><div class="checkout-products"><div class="checkout-item"><span class="thumb">🐾</span><div><b>Produto personalizado</b><small>Nome do pet · tamanho selecionado</small></div><strong>R$ 74,90</strong></div><div class="checkout-offer"><span>OFERTA CONTEXTUAL</span><b>${esc(copy)}</b><button class="wire-btn">Adicionar ao pedido</button></div></div><div class="checkout-summary"><b>Resumo do pedido</b><div><span>Subtotal</span><span>R$ 74,90</span></div><div><span>Benefício da campanha</span><span class="positive">aplicado ✓</span></div><hr><div><strong>Total</strong><strong>R$ 74,90</strong></div><button class="wire-btn secondary">Finalizar compra</button></div></div>`;
+  if(kind==='event') body=`<div class="event-mock"><div class="event-visual"><img src="${image}" alt="Bastidores da ação ${esc(c.n)}"><span>AO VIVO · 20:00</span></div><div class="event-info"><span class="mock-label">EVENTO DE RELACIONAMENTO</span><h4>${esc(c.n)}</h4><p>${esc(copy)}</p><div class="event-fields"><span>Seu nome</span><span>Seu WhatsApp</span></div><button class="wire-btn">Reservar minha vaga →</button></div></div>`;
+  if(kind==='referral') body=`<div class="referral-mock"><div class="referral-card"><span class="referral-icon">↗</span><span class="mock-label">CONVITE PERSONALIZADO</span><h4>Compartilhe o cuidado.</h4><p>${esc(copy)}</p><div class="referral-code">AMIGO-AP-2026 <button>Copiar</button></div><button class="wire-btn">Compartilhar no WhatsApp</button></div><div class="referral-result"><b>Rastreabilidade</b><span>Indicador: cliente AP-0001</span><span>Indicado: aguardando cadastro</span><span>Status: benefício pendente de compra</span></div></div>`;
+  if(kind==='loyalty') body=`<div class="loyalty-mock"><div class="loyalty-head"><span>FAMÍLIA AMOR DE PATAS</span><b>NÍVEL 02</b></div><h4>${esc(c.n)}</h4><p>${esc(copy)}</p><div class="loyalty-progress"><span style="width:68%"></span></div><div class="loyalty-foot"><span>680 pontos</span><b>Próximo nível: 1.000</b></div><button class="wire-btn">Ver benefícios disponíveis →</button></div>`;
+  return head+body+foot;
+}
 function openRecipe(index){
   const c=campaigns[index]; document.querySelector('#modalEyebrow').textContent=`${c.s} · campanha ${String(index+1).padStart(2,'0')}`; document.querySelector('#modalTitle').textContent=c.n;
   document.querySelector('#modalMeta').innerHTML=`<span class="meta-pill">Público: ${esc(c.p)}</span><span class="meta-pill">Canal: ${esc(c.c)}</span><span class="meta-pill">Carteirinha: ${c.v}</span><span class="meta-pill">Enxuto: ${money(c.b)}/mês</span><span class="meta-pill">Escala: ${money(c.e)}/90 dias</span><span class="meta-pill">Resultado: ${esc(c.r)}</span>`;
@@ -78,6 +150,7 @@ function openRecipe(index){
   const texts=[`Comece com uma ficha de campanha: objetivo = ${esc(c.r)}, público = ${esc(c.p)} e responsável no calendário. Registre origem, consentimento e uma UTM única antes de produzir qualquer peça.`,`${esc(c.x)}`,`Ative em ${esc(c.c)}. ${esc(c.a)} Garanta que o link funcione no celular, que o estoque esteja atualizado e que o atendimento conheça o script da campanha.`,`Monitore diariamente a entrega e, em até 15 minutos, encaminhe respostas ou leads com intenção de compra ao responsável. Registre no SuiteCRM a etapa, interesse, espécie, origem, resultado e próxima tarefa.`,`Meça ${esc(c.m)} ${esc(c.i)} Separe resultado direto de assistido e faça o fechamento somente após conferir vendas, margem e qualidade do lead.`,`Aprendizado e próximo teste: ${esc(c.t)} Ao final do ciclo, mantenha, ajuste ou pause com base em custo por resultado e contribuição para a etapa seguinte.`];
   document.querySelector('#modalSteps').innerHTML=texts.map((t,i)=>`<div class="recipe-step"><span class="step-no">${i+1}</span><div><h4>${common[Math.min(i,common.length-1)]}</h4><p>${t}</p></div></div>`).join('');
   document.querySelector('#modalSidebar').innerHTML=`<div class="side-card"><h4>Resultado planejado</h4><p><strong>${esc(c.r)}</strong><br>Investimento enxuto: ${money(c.b)}/mês<br>Investimento escala: ${money(c.e)}/90 dias</p></div><div class="side-card"><h4>Ativo obrigatório</h4><p>${esc(c.a)}</p></div><div class="side-card"><h4>Insight de execução</h4><p>${esc(c.i)}</p></div><div class="side-card"><h4>Critério de parada</h4><p>Não escalar se houver ruptura de estoque, tracking quebrado, opt-out alto ou queda persistente de qualidade. Corrija a causa e registre a decisão.</p></div>`;
+  document.querySelector('#modalMockup').innerHTML=renderMockup(c,index);
   bootstrap.Modal.getOrCreateInstance(document.querySelector('#campaignModal')).show();
 }
 function renderCalendar(){document.querySelector('#calendarBody').innerHTML=calendar.map((r,i)=>`<tr><td><strong>${r[0]}</strong></td><td><span class="calendar-stage ${stageClass(r[1])}">${r[1]}</span></td><td>${esc(r[2])}</td><td class="text-muted">${esc(r[3])}</td><td><select class="status-select calendar-status" data-row="${i}"><option>Planejado</option><option>Em produção</option><option>Ativo</option><option>Concluído</option><option>Bloqueado</option></select></td></tr>`).join(''); document.querySelectorAll('.calendar-status').forEach(s=>{const key=`calendar-${s.dataset.row}`;s.value=localStorage.getItem(key)||'Planejado';s.addEventListener('change',()=>localStorage.setItem(key,s.value))})}
